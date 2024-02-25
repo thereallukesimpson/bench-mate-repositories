@@ -74,3 +74,9 @@ android {
 publishing.repositories.maven {
 
 }
+
+sqldelight {
+    database(name = "BenchMateDatabase") {
+        packageName = "app.benchmate.repositories.common.db"
+    }
+}
