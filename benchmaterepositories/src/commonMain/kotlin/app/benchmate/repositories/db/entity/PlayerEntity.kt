@@ -1,4 +1,4 @@
-package app.benchmate.repositories.common.db.entity
+package app.benchmate.repositories.db.entity
 
 import app.benchmate.repositories.models.PlayerStatus
 import kotlinx.serialization.SerialName

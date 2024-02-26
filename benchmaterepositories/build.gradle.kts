@@ -13,7 +13,7 @@ version = "0.0.4"
 kotlin {
 //    targetHierarchy.default()
 
-    android {
+    androidTarget {
         jvm()
         compilations.all {
             kotlinOptions {
@@ -76,7 +76,7 @@ publishing.repositories.maven {
 }
 
 sqldelight {
-    database(name = "BenchMateDatabase") {
-        packageName = "app.benchmate.repositories.common.db"
+    database(name = "AppDatabase") {
+        packageName = "app.benchmate.repositories.db"
     }
 }
