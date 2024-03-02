@@ -4,8 +4,7 @@ CREATE TABLE Player (
     playerId TEXT NOT NULL,
     firstName TEXT NOT NULL,
     number INTEGER NOT NULL,
-    playerStatus TEXT,
---     playerStatus TEXT AS PlayerStatus,
+    playerStatus TEXT AS PlayerStatus,
     onBenchCount INTEGER
 );
 
