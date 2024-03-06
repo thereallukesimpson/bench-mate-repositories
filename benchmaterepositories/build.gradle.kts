@@ -15,6 +15,7 @@ kotlin {
 
     androidTarget {
         jvm()
+        task("testClasses")
         compilations.all {
             kotlinOptions {
                 kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
@@ -71,9 +72,9 @@ android {
     }
 }
 
-publishing.repositories.maven {
-
-}
+//publishing.repositories.maven {
+//
+//}
 
 sqldelight {
     database(name = "AppDatabase") {
