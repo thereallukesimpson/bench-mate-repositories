@@ -72,9 +72,9 @@ android {
     }
 }
 
-//publishing.repositories.maven {
-//
-//}
+publishing.repositories.maven {
+
+}
 
 sqldelight {
     database(name = "AppDatabase") {
