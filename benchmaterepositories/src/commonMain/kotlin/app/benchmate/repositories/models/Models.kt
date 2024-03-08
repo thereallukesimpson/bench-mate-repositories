@@ -10,7 +10,8 @@ data class Player(
     val playerId: String,
     val firstName: String,
     val lastName: String,
-    val games: List<Game>
+    val games: List<Game>,
+    val playerStatus: PlayerStatus
 )
 
 data class Game(
@@ -32,4 +33,9 @@ data class BenchItem(
     val startTime: Int = 0, // TODO use TimeMark or similar
     val endTime: Int // TODO use TimeMark or similar
 )
+
+enum class PlayerStatus {
+    NONE,
+    BENCH
+}
 

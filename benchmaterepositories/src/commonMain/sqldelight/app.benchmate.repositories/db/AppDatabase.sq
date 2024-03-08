@@ -1,0 +1,17 @@
+import app.benchmate.repositories.models.PlayerStatus;
+
+CREATE TABLE Player (
+    playerId TEXT NOT NULL,
+    firstName TEXT NOT NULL,
+    number INTEGER NOT NULL,
+    playerStatus TEXT AS PlayerStatus,
+    onBenchCount INTEGER
+);
+
+insertPlayer:
+INSERT INTO Player(playerId, firstName, number, playerStatus, onBenchCount)
+VALUES(?, ?, ?, ?, ?);
+
+selectAllPlayers:
+SELECT Player.*
+FROM Player;

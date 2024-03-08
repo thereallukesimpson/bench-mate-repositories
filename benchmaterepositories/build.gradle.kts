@@ -2,17 +2,20 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("maven-publish")
+    kotlin("plugin.serialization").version(libs.versions.serializationPlugin)
+    id("com.squareup.sqldelight").version(libs.versions.sqlDelightPlugin)
 }
 
 group = "app.benchmate"
-version = "0.0.4"
+version = "0.0.5"
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
+//    targetHierarchy.default()
 
-    android {
+    androidTarget {
         jvm()
+        task("testClasses")
         compilations.all {
             kotlinOptions {
                 kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
@@ -33,7 +36,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                //put your multiplatform dependencies here
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
+                implementation(libs.runtime)
+                implementation(libs.kotlinx.datetime)
             }
         }
         val commonTest by getting {
@@ -41,6 +49,18 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.android)
+                implementation(libs.android.driver)
+            }
+        }
+//        val iosMain by getting {
+//            dependencies {
+//                implementation(libs.ktor.client.darwin)
+//                implementation(libs.native.driver)
+//            }
+//        }
     }
 }
 
@@ -54,4 +74,10 @@ android {
 
 publishing.repositories.maven {
 
+}
+
+sqldelight {
+    database(name = "AppDatabase") {
+        packageName = "app.benchmate.repositories.db"
+    }
 }
