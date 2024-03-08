@@ -13,7 +13,7 @@ data class PlayerEntity(
     @SerialName("number")
     val number: Int,
     @SerialName("player_status")
-    val playerStatus: PlayerStatus,
+    val playerStatus: PlayerStatus?,
     @SerialName("on_bench_count")
-    val onBenchCount: Int
+    val onBenchCount: Int?
 )

@@ -31,22 +31,14 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
     }
 
     internal fun getAllPlayers(): List<PlayerEntity> {
-        return dbQuery.selectAllPlayers(::mapPlayerSelecting).executeAsList()
-    }
-
-    private fun mapPlayerSelecting(
-        playerId: String,
-        firstName: String,
-        number: Int,
-        playerStatus: PlayerStatus,
-        onBenchCount: Int
-    ): PlayerEntity {
-         return PlayerEntity(
-             playerId = playerId,
-             firstName = firstName,
-             number = number,
-             playerStatus = playerStatus,
-             onBenchCount = onBenchCount
-         )
+        return dbQuery.selectAllPlayers().executeAsList().map {
+                PlayerEntity(
+                    playerId = it.playerId,
+                    firstName = it.firstName,
+                    number = it.number.toInt(),
+                    playerStatus = it.playerStatus,
+                    onBenchCount = it.onBenchCount?.toInt()
+                )
+        }
     }
 }
