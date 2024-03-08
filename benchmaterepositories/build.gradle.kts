@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "app.benchmate"
-version = "0.0.4"
+version = "0.0.5"
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
