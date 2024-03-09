@@ -3,11 +3,11 @@ plugins {
     id("com.android.library")
     id("maven-publish")
     kotlin("plugin.serialization").version(libs.versions.serializationPlugin)
-    id("app.cash.sqldelight").version(libs.versions.sqlDelightPlugin)
+    id("app.cash.sqldelight").version(libs.versions.sqlDelightVersion)
 }
 
 group = "app.benchmate"
-version = "0.0.5"
+version = "0.0.6"
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
@@ -53,7 +53,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(libs.ktor.client.android)
-//                implementation(libs.android.driver)
+                implementation(libs.android.driver)
             }
         }
         val jvmMain by getting {
@@ -72,9 +72,13 @@ kotlin {
 
 android {
     namespace = "app.benchmate.repositories"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         minSdk = 24
+    }
+
+    sourceSets {
+
     }
 }
 
