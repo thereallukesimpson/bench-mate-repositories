@@ -2,8 +2,8 @@ package app.benchmate.repositories.db
 
 import app.benchmate.repositories.db.entity.PlayerEntity
 import app.benchmate.repositories.models.PlayerStatus
+import app.cash.sqldelight.EnumColumnAdapter
 import appbenchmaterepositories.db.Player
-import com.squareup.sqldelight.EnumColumnAdapter
 
 internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
     private val database = AppDatabase(

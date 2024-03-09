@@ -10,13 +10,13 @@ espresso-core = "3.5.1"
 appcompat = "1.6.1"
 ktorVersion = "2.3.8"
 material = "1.11.0"
-sqlDelightVersion = "1.5.5"
+#sqlDelightVersion = "1.5.5"
 serializationPlugin = "1.9.22"
-sqlDelightPlugin = "1.5.5"
-jvmDriverVersion = "2.0.0"
+sqlDelightPlugin = "2.0.1"
+jvmDriverVersion = "2.0.1"
 
 [libraries]
-android-driver = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqlDelightVersion" }
+#android-driver = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqlDelightVersion" }
 jvm-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "jvmDriverVersion" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -31,8 +31,8 @@ ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorVer
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktorVersion" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-native-driver = { module = "com.squareup.sqldelight:native-driver", version.ref = "sqlDelightVersion" }
-runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelightVersion" }
+#native-driver = { module = "com.squareup.sqldelight:native-driver", version.ref = "sqlDelightVersion" }
+#runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelightVersion" }
 
 
 [plugins]

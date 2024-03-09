@@ -3,7 +3,7 @@ plugins {
     id("com.android.library")
     id("maven-publish")
     kotlin("plugin.serialization").version(libs.versions.serializationPlugin)
-    id("com.squareup.sqldelight").version(libs.versions.sqlDelightPlugin)
+    id("app.cash.sqldelight").version(libs.versions.sqlDelightPlugin)
 }
 
 group = "app.benchmate"
@@ -41,7 +41,7 @@ kotlin {
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.client.content.negotiation)
                 implementation(libs.ktor.serialization.kotlinx.json)
-                implementation(libs.runtime)
+//                implementation(libs.runtime)
                 implementation(libs.kotlinx.datetime)
             }
         }
@@ -53,7 +53,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(libs.ktor.client.android)
-                implementation(libs.android.driver)
+//                implementation(libs.android.driver)
             }
         }
         val jvmMain by getting {
@@ -83,7 +83,9 @@ publishing.repositories.maven {
 }
 
 sqldelight {
-    database(name = "AppDatabase") {
-        packageName = "app.benchmate.repositories.db"
+    databases {
+        create(name = "AppDatabase") {
+            packageName.set("app.benchmate.repositories.db")
+        }
     }
 }
