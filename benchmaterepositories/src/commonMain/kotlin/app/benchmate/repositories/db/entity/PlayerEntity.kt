@@ -1,5 +1,6 @@
 package app.benchmate.repositories.db.entity
 
+import app.benchmate.repositories.models.Player
 import app.benchmate.repositories.models.PlayerStatus
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -17,3 +18,13 @@ data class PlayerEntity(
     @SerialName("on_bench_count")
     val onBenchCount: Int?
 )
+
+fun PlayerEntity.toDomain(): Player {
+    return Player(
+        playerId = playerId,
+        firstName = firstName,
+        number = number,
+        playerStatus = playerStatus,
+        onBenchCount = onBenchCount
+    )
+}
