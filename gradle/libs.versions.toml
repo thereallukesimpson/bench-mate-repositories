@@ -13,9 +13,11 @@ material = "1.11.0"
 sqlDelightVersion = "1.5.5"
 serializationPlugin = "1.9.22"
 sqlDelightPlugin = "1.5.5"
+jvmDriverVersion = "2.0.0"
 
 [libraries]
 android-driver = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqlDelightVersion" }
+jvm-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "jvmDriverVersion" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }

@@ -13,8 +13,9 @@ version = "0.0.5"
 kotlin {
 //    targetHierarchy.default()
 
+    jvm()
+
     androidTarget {
-        jvm()
         task("testClasses")
         compilations.all {
             kotlinOptions {
@@ -53,6 +54,11 @@ kotlin {
             dependencies {
                 implementation(libs.ktor.client.android)
                 implementation(libs.android.driver)
+            }
+        }
+        val jvmMain by getting {
+            dependencies {
+                implementation(libs.jvm.driver)
             }
         }
 //        val iosMain by getting {
