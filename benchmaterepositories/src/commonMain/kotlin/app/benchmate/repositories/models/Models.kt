@@ -9,9 +9,10 @@ data class Team(
 data class Player(
     val playerId: String,
     val firstName: String,
-    val lastName: String,
-    val games: List<Game>,
-    val playerStatus: PlayerStatus
+    val number: Int,
+    val playerStatus: PlayerStatus?,
+    val onBenchCount: Int?,
+//    val games: List<Game> // N/A right now
 )
 
 data class Game(
