@@ -17,6 +17,14 @@ interface PlayerRepository {
         playerStatus: PlayerStatus,
         onBenchCount: Int
     )
+
+    suspend fun updatePlayerStatus(
+        playerId: String,
+        playerStatus: PlayerStatus,
+        onBenchCount: Int
+    )
+
+    suspend fun clearBenchCountAndPlayerStatus()
 }
 
 class RealPlayerRepository(databaseDriverFactory: DatabaseDriverFactory): PlayerRepository {
@@ -43,5 +51,13 @@ class RealPlayerRepository(databaseDriverFactory: DatabaseDriverFactory): Player
             playerStatus = playerStatus,
             onBenchCount = onBenchCount
         )
+    }
+
+    override suspend fun updatePlayerStatus(playerId: String, playerStatus: PlayerStatus, onBenchCount: Int) {
+       database.updatePlayerStatus(playerId, playerStatus, onBenchCount = onBenchCount)
+    }
+
+    override suspend fun clearBenchCountAndPlayerStatus() {
+        database.clearBenchCountAndPlayerStatus()
     }
 }

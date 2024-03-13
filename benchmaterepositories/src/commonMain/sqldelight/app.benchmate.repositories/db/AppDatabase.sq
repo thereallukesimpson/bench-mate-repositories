@@ -15,3 +15,11 @@ VALUES(?, ?, ?, ?, ?);
 selectAllPlayers:
 SELECT Player.*
 FROM Player;
+
+updatePlayerStatus:
+UPDATE Player
+SET playerStatus=?, onBenchCount=? WHERE playerId=?;
+
+clearBenchCountAndPlayerStatus:
+UPDATE Player
+SET playerStatus=?, onBenchCount=?;
