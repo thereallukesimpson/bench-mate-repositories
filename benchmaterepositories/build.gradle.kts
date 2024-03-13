@@ -7,32 +7,38 @@ plugins {
 }
 
 group = "app.benchmate"
-version = "0.0.6"
+version = "0.0.7"
+
+//repositories {
+//    google()
+//    mavenCentral()
+//}
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
 //    targetHierarchy.default()
 
-    jvm()
-
     androidTarget {
         task("testClasses")
         compilations.all {
             kotlinOptions {
-                kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
+                kotlinOptions { jvmTarget = JavaVersion.VERSION_17.toString() }
             }
         }
+        publishLibraryVariants("release", "debug")
     }
+
+//    jvm()
     
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "benchmaterepositories"
-        }
-    }
+//    listOf(
+//        iosX64(),
+//        iosArm64(),
+//        iosSimulatorArm64()
+//    ).forEach {
+//        it.binaries.framework {
+//            baseName = "benchmaterepositories"
+//        }
+//    }
 
     sourceSets {
         val commonMain by getting {
@@ -56,11 +62,11 @@ kotlin {
                 implementation(libs.android.driver)
             }
         }
-        val jvmMain by getting {
-            dependencies {
-                implementation(libs.jvm.driver)
-            }
-        }
+//        val jvmMain by getting {
+//            dependencies {
+//                implementation(libs.jvm.driver)
+//            }
+//        }
 //        val iosMain by getting {
 //            dependencies {
 //                implementation(libs.ktor.client.darwin)
@@ -77,8 +83,9 @@ android {
         minSdk = 24
     }
 
-    sourceSets {
-
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
