@@ -4,10 +4,11 @@ plugins {
     id("maven-publish")
     kotlin("plugin.serialization").version(libs.versions.serializationPlugin)
     id("app.cash.sqldelight").version(libs.versions.sqlDelightVersion)
+    alias(libs.plugins.ksp)
 }
 
 group = "app.benchmate"
-version = "0.0.8"
+version = "0.0.9"
 
 //repositories {
 //    google()
@@ -49,6 +50,7 @@ kotlin {
                 implementation(libs.ktor.serialization.kotlinx.json)
 //                implementation(libs.runtime)
                 implementation(libs.kotlinx.datetime)
+                implementation(libs.kotlinInject.runtime)
             }
         }
         val commonTest by getting {
@@ -99,4 +101,17 @@ sqldelight {
             packageName.set("app.benchmate.repositories.db")
         }
     }
+}
+
+dependencies {
+    implementation(libs.kotlinInject.runtime)
+
+    // KSP will eventually have better multiplatform support and we'll be able to simply have
+    // `ksp libs.kotlinInject.compiler` in the dependencies block of each source set
+    // https://github.com/google/ksp/pull/1021
+    add("kspAndroid", libs.kotlinInject.compiler)
+//    kspAndroid("me.tatarka.inject:kotlin-inject-compiler-ksp:0.7.2")
+//    add("kspIosX64", libs.kotlinInject.compiler)
+//    add("kspIosArm64", libs.kotlinInject.compiler)
+//    add("kspIosSimulatorArm64", libs.kotlinInject.compiler)
 }

@@ -5,6 +5,7 @@ import app.benchmate.repositories.db.DatabaseDriverFactory
 import app.benchmate.repositories.db.entity.toDomain
 import app.benchmate.repositories.models.Player
 import app.benchmate.repositories.models.PlayerStatus
+import me.tatarka.inject.annotations.Inject
 
 interface PlayerRepository {
 
@@ -27,6 +28,7 @@ interface PlayerRepository {
     suspend fun clearBenchCountAndPlayerStatus()
 }
 
+@Inject
 class RealPlayerRepository(databaseDriverFactory: DatabaseDriverFactory): PlayerRepository {
 
     private val database = Database(databaseDriverFactory)
