@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
@@ -10,13 +13,18 @@ plugins {
 group = "app.benchmate"
 version = "0.0.9"
 
-//repositories {
-//    google()
-//    mavenCentral()
-//}
+repositories {
+    google()
+    mavenCentral()
+}
+
+ksp {
+    arg("me.tatarka.inject.generateCompanionExtensions", "true")
+}
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+//    configureCommonMainKsp()
 //    targetHierarchy.default()
 
     androidTarget {
@@ -62,6 +70,8 @@ kotlin {
             dependencies {
                 implementation(libs.ktor.client.android)
                 implementation(libs.android.driver)
+                implementation("androidx.core:core-ktx:1.12.0") // Use the latest version
+                implementation("androidx.appcompat:appcompat:1.6.1")
             }
         }
 //        val jvmMain by getting {
@@ -104,7 +114,8 @@ sqldelight {
 }
 
 dependencies {
-    implementation(libs.kotlinInject.runtime)
+//    implementation(libs.kotlinInject.runtime)
+    kspCommonMainMetadata(libs.kotlinInject.runtime)
 
     // KSP will eventually have better multiplatform support and we'll be able to simply have
     // `ksp libs.kotlinInject.compiler` in the dependencies block of each source set
@@ -115,3 +126,16 @@ dependencies {
 //    add("kspIosArm64", libs.kotlinInject.compiler)
 //    add("kspIosSimulatorArm64", libs.kotlinInject.compiler)
 }
+
+//@OptIn(ExternalVariantApi::class)
+//fun KotlinMultiplatformExtension.configureCommonMainKsp() {
+//    sourceSets.named("commonMain").configure {
+//        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+//    }
+//
+//    project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
+//        if(name != "kspCommonMainKotlinMetadata") {
+//            dependsOn("kspCommonMainKotlinMetadata")
+//        }
+//    }
+//}
