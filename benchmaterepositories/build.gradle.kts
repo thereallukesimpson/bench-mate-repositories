@@ -1,13 +1,13 @@
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
     id("maven-publish")
-    kotlin("plugin.serialization").version(libs.versions.serializationPlugin)
-    id("app.cash.sqldelight").version(libs.versions.sqlDelightVersion)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.sqlDelight)
 }
 
 group = "app.benchmate"
-version = "0.0.8"
+version = "0.0.9"
 
 //repositories {
 //    google()

@@ -11,7 +11,6 @@ interface PlayerRepository {
     suspend fun getAllPlayers(): List<Player>
 
     suspend fun addPlayer(
-        playerId: String,
         firstName: String,
         number: Int,
         playerStatus: PlayerStatus,
@@ -38,14 +37,12 @@ class RealPlayerRepository(databaseDriverFactory: DatabaseDriverFactory): Player
     }
 
     override suspend fun addPlayer(
-        playerId: String,
         firstName: String,
         number: Int,
         playerStatus: PlayerStatus,
         onBenchCount: Int
     ) {
         database.addPlayerToDatabase(
-            playerId = playerId,
             firstName = firstName,
             number = number,
             playerStatus = playerStatus,
