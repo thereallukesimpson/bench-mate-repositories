@@ -4,6 +4,8 @@ import app.benchmate.repositories.db.entity.PlayerEntity
 import app.benchmate.repositories.models.PlayerStatus
 import app.cash.sqldelight.EnumColumnAdapter
 import appbenchmaterepositories.db.Player
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
     private val database = AppDatabase(
@@ -14,15 +16,15 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
     )
     private val dbQuery = database.appDatabaseQueries
 
+    @OptIn(ExperimentalUuidApi::class)
     internal fun addPlayerToDatabase(
-        playerId: String,
         firstName: String,
         number: Int,
         playerStatus: PlayerStatus,
         onBenchCount: Int
     ) {
         dbQuery.insertPlayer(
-            playerId = playerId,
+            playerId = Uuid.random().toString(),
             firstName = firstName,
             number = number.toLong(),
             playerStatus = playerStatus,
