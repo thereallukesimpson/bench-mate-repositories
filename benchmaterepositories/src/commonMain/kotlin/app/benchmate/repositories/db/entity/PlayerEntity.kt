@@ -16,7 +16,9 @@ data class PlayerEntity(
     @SerialName("player_status")
     val playerStatus: PlayerStatus?,
     @SerialName("on_bench_count")
-    val onBenchCount: Int?
+    val onBenchCount: Int?,
+    @SerialName("bench_items")
+    val benchItems: List<BenchItemEntity>
 )
 
 fun PlayerEntity.toDomain(): Player {
@@ -25,6 +27,7 @@ fun PlayerEntity.toDomain(): Player {
         firstName = firstName,
         number = number,
         playerStatus = playerStatus,
-        onBenchCount = onBenchCount
+        onBenchCount = onBenchCount,
+        benchItems = benchItems.map { it.toDomain() }
     )
 }
