@@ -1,5 +1,6 @@
 package app.benchmate.repositories.db
 
+import app.benchmate.repositories.db.entity.BenchItemEntity
 import app.benchmate.repositories.db.entity.PlayerEntity
 import app.benchmate.repositories.models.PlayerStatus
 import app.cash.sqldelight.EnumColumnAdapter
@@ -34,13 +35,14 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
 
     internal fun getAllPlayers(): List<PlayerEntity> {
         return dbQuery.selectAllPlayers().executeAsList().map {
-                PlayerEntity(
-                    playerId = it.playerId,
-                    firstName = it.firstName,
-                    number = it.number.toInt(),
-                    playerStatus = it.playerStatus,
-                    onBenchCount = it.onBenchCount?.toInt()
-                )
+            PlayerEntity(
+                playerId = it.playerId,
+                firstName = it.firstName,
+                number = it.number.toInt(),
+                playerStatus = it.playerStatus,
+                onBenchCount = it.onBenchCount?.toInt(),
+                benchItems = getBenchItemsForPlayer(it.playerId)
+            )
         }
     }
 
@@ -50,5 +52,37 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
 
     internal fun clearBenchCountAndPlayerStatus() {
         return dbQuery.clearBenchCountAndPlayerStatus(playerStatus = PlayerStatus.NONE, onBenchCount = 0)
+    }
+
+    @OptIn(ExperimentalUuidApi::class)
+    internal fun addBenchItem(playerId: String, startTime: Long, gameId: String? = null) {
+        dbQuery.insertBenchItem(
+            benchItemId = Uuid.random().toString(),
+            playerId = playerId,
+            gameId = gameId,
+            startTime = startTime
+        )
+    }
+
+    internal fun getBenchItemsForPlayer(playerId: String): List<BenchItemEntity> {
+        return dbQuery.selectBenchItemsByPlayerId(playerId).executeAsList().map {
+            BenchItemEntity(
+                benchItemId = it.benchItemId,
+                playerId = it.playerId,
+                gameId = it.gameId,
+                startTime = it.startTime,
+                endTime = it.endTime,
+            )
+        }
+    }
+
+    internal fun pauseBenchTime(playerId: String, endTime: Long) {
+        val openItem = dbQuery.selectLatestOpenBenchItemForPlayer(playerId).executeAsOneOrNull()
+            ?: return
+        dbQuery.updateBenchItemEndTime(endTime = endTime, benchItemId = openItem.benchItemId)
+    }
+
+    internal fun clearBenchItems() {
+        dbQuery.clearAllBenchItems()
     }
 }

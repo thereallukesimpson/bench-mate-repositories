@@ -23,3 +23,35 @@ SET playerStatus=?, onBenchCount=? WHERE playerId=?;
 clearBenchCountAndPlayerStatus:
 UPDATE Player
 SET playerStatus=?, onBenchCount=?;
+
+CREATE TABLE BenchItem (
+    benchItemId TEXT NOT NULL,
+    playerId    TEXT NOT NULL,
+    gameId      TEXT,
+    startTime   INTEGER NOT NULL,
+    endTime     INTEGER
+);
+
+insertBenchItem:
+INSERT INTO BenchItem(benchItemId, playerId, gameId, startTime)
+VALUES(?, ?, ?, ?);
+
+selectBenchItemsByPlayerId:
+SELECT BenchItem.*
+FROM BenchItem
+WHERE playerId = ?;
+
+selectLatestOpenBenchItemForPlayer:
+SELECT BenchItem.*
+FROM BenchItem
+WHERE playerId = ? AND endTime IS NULL
+ORDER BY startTime DESC
+LIMIT 1;
+
+updateBenchItemEndTime:
+UPDATE BenchItem
+SET endTime = ?
+WHERE benchItemId = ?;
+
+clearAllBenchItems:
+DELETE FROM BenchItem;

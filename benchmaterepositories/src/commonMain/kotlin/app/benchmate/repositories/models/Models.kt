@@ -33,9 +33,9 @@ data class Bench(
 
 data class BenchItem(
     val playerId: String,
-    val gameId: String? = null, // N/A for now
+    val gameId: String? = null,
     val startTime: TimeMark,
-//    val endTime: TimeMark // not needed?
+    val endTime: TimeMark? = null,
 )
 
 enum class PlayerStatus {
