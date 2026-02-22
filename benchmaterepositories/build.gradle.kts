@@ -19,16 +19,17 @@ kotlin {
 //    targetHierarchy.default()
 
     androidTarget {
-        task("testClasses")
-        compilations.all {
-            kotlinOptions {
-                kotlinOptions { jvmTarget = JavaVersion.VERSION_17.toString() }
-            }
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
         }
         publishLibraryVariants("release", "debug")
     }
 
-    jvm()
+    jvm {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
+    }
     
 //    listOf(
 //        iosX64(),
