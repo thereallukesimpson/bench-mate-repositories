@@ -1,5 +1,7 @@
 package app.benchmate.repositories.models
 
+import kotlin.time.TimeMark
+
 data class Team(
     val teamId: String,
     val teamName: String,
@@ -11,7 +13,8 @@ data class Player(
     val firstName: String,
     val number: Int,
     val playerStatus: PlayerStatus?,
-    val onBenchCount: Int?,
+    val benchItems: List<BenchItem>,
+    val onBenchCount: Int?, // TODO deprecate this field in favour of benchItems.size
 //    val games: List<Game> // N/A right now
 )
 
@@ -30,9 +33,9 @@ data class Bench(
 
 data class BenchItem(
     val playerId: String,
-    val gameId: String,
-    val startTime: Int = 0, // TODO use TimeMark or similar
-    val endTime: Int // TODO use TimeMark or similar
+    val gameId: String? = null,
+    val startTime: TimeMark,
+    val endTime: TimeMark? = null,
 )
 
 enum class PlayerStatus {

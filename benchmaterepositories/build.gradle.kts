@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "app.benchmate"
-version = "0.0.9"
+version = "0.1.0"
 
 //repositories {
 //    google()
@@ -28,7 +28,7 @@ kotlin {
         publishLibraryVariants("release", "debug")
     }
 
-//    jvm()
+    jvm()
     
 //    listOf(
 //        iosX64(),
@@ -62,11 +62,11 @@ kotlin {
                 implementation(libs.android.driver)
             }
         }
-//        val jvmMain by getting {
-//            dependencies {
-//                implementation(libs.jvm.driver)
-//            }
-//        }
+        val jvmMain by getting {
+            dependencies {
+                implementation(libs.jvm.driver)
+            }
+        }
 //        val iosMain by getting {
 //            dependencies {
 //                implementation(libs.ktor.client.darwin)
