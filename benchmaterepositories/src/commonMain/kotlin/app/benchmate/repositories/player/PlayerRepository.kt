@@ -29,8 +29,6 @@ interface PlayerRepository {
 
     suspend fun addBenchItem(playerId: String)
 
-    suspend fun continueBenchTime(playerId: String)
-
     suspend fun pauseBenchTime(playerId: String)
 
     suspend fun clearBenchItems()
@@ -69,13 +67,6 @@ class RealPlayerRepository(databaseDriverFactory: DatabaseDriverFactory): Player
     }
 
     override suspend fun addBenchItem(playerId: String) {
-        database.addBenchItem(
-            playerId = playerId,
-            startTime = with(TimeMarkConverter) { TimeSource.Monotonic.markNow().toLong() }
-        )
-    }
-
-    override suspend fun continueBenchTime(playerId: String) {
         database.addBenchItem(
             playerId = playerId,
             startTime = with(TimeMarkConverter) { TimeSource.Monotonic.markNow().toLong() }
