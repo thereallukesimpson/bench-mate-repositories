@@ -47,11 +47,11 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
     }
 
     internal fun updatePlayerStatus(playerId: String, status: PlayerStatus, onBenchCount: Int) {
-        return dbQuery.updatePlayerStatus(playerId = playerId, playerStatus = status, onBenchCount = onBenchCount.toLong())
+        dbQuery.updatePlayerStatus(playerId = playerId, playerStatus = status, onBenchCount = onBenchCount.toLong())
     }
 
     internal fun clearBenchCountAndPlayerStatus() {
-        return dbQuery.clearBenchCountAndPlayerStatus(playerStatus = PlayerStatus.NONE, onBenchCount = 0)
+        dbQuery.clearBenchCountAndPlayerStatus(playerStatus = PlayerStatus.NONE, onBenchCount = 0)
     }
 
     @OptIn(ExperimentalUuidApi::class)
